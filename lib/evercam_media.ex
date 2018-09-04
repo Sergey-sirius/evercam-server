@@ -47,6 +47,7 @@ defmodule EvercamMedia do
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
     EvercamMediaWeb.Endpoint.config_change(changed, removed)
+    IO.inspect "I am getting called"
     ensure_porcelain_init()
     :ok
   end
