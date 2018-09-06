@@ -12,8 +12,6 @@ defmodule EvercamMedia.EvercamBot.TelegramSupervisor do
   end
 
   def init(:ok) do
-    {:ok, _} = Application.ensure_all_started(:evercam_media)
-    IO.inspect Porcelain.shell("ls", [err: :out]).out
     case Application.get_env(:evercam_media, :start_evercam_bot) do
       true ->
         Task.start_link(&start_matcher/0)
