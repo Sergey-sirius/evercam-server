@@ -33,7 +33,7 @@ defmodule EvercamMedia.MoveSdCardToCloud do
       |> Calendar.DateTime.Parse.unix!
       |> Calendar.Strftime.strftime!("%Y-%m-%dT%H:%M:%SZ")
     xm_e_date =
-      start_date + 432000
+      start_date + 172800
       |> not_greater_than_actual_date(end_date)
       |> Calendar.DateTime.Parse.unix!
       |> Calendar.Strftime.strftime!("%Y-%m-%dT%H:%M:%SZ")
@@ -42,9 +42,9 @@ defmodule EvercamMedia.MoveSdCardToCloud do
     |> fetch_local_urls(auth, host_port)
     |> extract_jpegs_and_inject(auth, host_port, camera_exid, timezone)
 
-    case start_date + 432000 > end_date do
+    case start_date + 172800 > end_date do
       true -> :ok
-      false -> start_extraction(start_date + 432000, end_date, auth, host_port, camera_exid, timezone)
+      false -> start_extraction(start_date + 172800, end_date, auth, host_port, camera_exid, timezone)
     end
   end
 
