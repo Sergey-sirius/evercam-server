@@ -23,6 +23,7 @@ defmodule EvercamMedia.MoveSdCardToCloud do
     timezone = "Europe/Dublin"
 
     spawn fn ->
+      Logger.info "Extraction started."
       start_extraction(start_date, end_date, auth, host_port, camera_exid, timezone)
     end
   end
@@ -39,8 +40,11 @@ defmodule EvercamMedia.MoveSdCardToCloud do
       |> Calendar.Strftime.strftime!("%Y-%m-%dT%H:%M:%SZ")
 
     add_date_to_xml(xm_s_date, xm_e_date)
+    |> IO.inspect
     |> fetch_local_urls(auth, host_port)
+    |> IO.inspect
     |> extract_jpegs_and_inject(auth, host_port, camera_exid, timezone)
+    |> IO.inspect
 
     case start_date + 172800 > end_date do
       true -> :ok
